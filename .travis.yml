@@ -1,0 +1,41 @@
+dist: xenial
+language: php
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+    - ./bin/.phpunit
+
+env:
+  global:
+    - SYMFONY_PHPUNIT_DIR=./bin/.phpunit
+    - SYMFONY_DEPRECATIONS_HELPER=29
+
+addons:
+  postgresql: "10"
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.1
+
+before_install:
+  - composer self-update
+  - psql -c 'create database travis_ci_test;' -U postgres
+
+install:
+  - composer install
+  - ./bin/phpunit install
+  - php bin/console doctrine:migrations:migrate --no-interaction
+
+script:
+  - ./bin/phpunit
+  # this checks that the YAML config files contain no syntax errors
+  - ./bin/console lint:yaml config
+  # this checks that the Twig template files contain no syntax errors
+  - ./bin/console lint:twig templates
+  # this checks that the XLIFF translations contain no syntax errors
+  - ./bin/console lint:xliff translations
+  # this checks that Doctrine's mapping configurations are valid
+  - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
