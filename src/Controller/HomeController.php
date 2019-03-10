@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the application
+ * This file is part of the application.
  *
  * (c) Long Nguyen <hello@longnd.me>
  *
