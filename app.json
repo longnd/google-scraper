@@ -1,4 +1,8 @@
 {
+  "name": "Google scraper in PHP",
+  "description": "A simple PHP scraper that makes use of the Symfony 4 framework to scrap Google search result",
+  "repository": "https://github.com/longnd/google-scraper",
+  "keywords": ["php", "symfony", "scraper"],
   "addons": [
     "heroku-postgresql"
   ],
@@ -26,7 +30,6 @@
       "quantity": 1
     }
   },
-  "name": "symfony-testing",
   "scripts": {
   },
   "stack": "heroku-18"
