@@ -1,11 +1,14 @@
-# google-scraper
+# Google scraper
 A simple PHP scraper that makes use of the [Symfony](https://symfony.com/) web framework.
 
 This application supports extracting data from the Google search results page.
 
+[![Build Status](https://travis-ci.com/longnd/google-scraper.svg?token=YtVwfd3RAgKquYqTmUWB&branch=master)](https://travis-ci.com/longnd/google-scraper)
 ## Deploying
 
-### On your local:
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/longnd/google-scraper/tree/master)
+
+### Or, setting up your local :
 ```sh
 $ git clone git@github.com:longnd/google-scraper.git 
 $ cd google-scraper
