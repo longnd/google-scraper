@@ -31,9 +31,15 @@ class ScrapingRequest
      */
     private $results;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default":0})
+     */
+    private $isCompleted;
+
     public function __construct()
     {
         $this->results = new ArrayCollection();
+        $this->isCompleted = false;
     }
 
     public function getId(): ?int
@@ -80,6 +86,18 @@ class ScrapingRequest
                 $result->setRequest(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsCompleted(): ?bool
+    {
+        return $this->isCompleted;
+    }
+
+    public function setIsCompleted(bool $isCompleted): self
+    {
+        $this->isCompleted = $isCompleted;
 
         return $this;
     }
