@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="scrapping_results")
  * @ORM\Entity(repositoryClass="App\Repository\ScrapingResultRepository")
  */
 class ScrapingResult
