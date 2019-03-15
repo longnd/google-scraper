@@ -9,12 +9,24 @@
 
         <div class="row">
             <div class="col-md-12">
-                <form id="csvUploader" class="dropzone" method="post" action="{{ path('home') }}"
-                      enctype="multipart/form-data" data-dictDefaultMessage="Click here to upload nhe">
+                <form id="csvUploader" class="dropzone" method="post" action="{{ path('csvUpload') }}"
+                      enctype="multipart/form-data">
+                    <div class="dz-default dz-message"><span>Drop CSV file here or Click to upload</span></div>
                     <div class="fallback">
                         <input name="file" type="file" multiple />
                     </div>
                 </form>
+            </div>
+        </div>
+        <div class="row" id="processingIndicator" style="display: none;">
+            <div class="col-md-12">
+                <div class="progress mt-4 mb-4 processingIndicator">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                         aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="processingIndicator">{{ 'message.scraping_in_progress'|trans }}</div>
             </div>
         </div>
     </div>

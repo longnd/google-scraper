@@ -13,14 +13,15 @@ require('dropzone/dist/dropzone.css');
 const $ = require('jquery');
 
 var Dropzone = require('dropzone');
-
-Dropzone.options.csvUploader = {
-    uploadMultiple: false,
-    acceptedFiles: '.csv,text/csv,text/x-csv,application/csv,application/x-csv,text/comma-separated-values,text/x-comma-separated-values',
-    maxFiles: 1,
-    dictDefaultMessage: 'Drop CSV file here or Click to upload'
-};
+Dropzone.autoDiscover = false;
 
 $(document).ready(function() {
-
+    $('.dropzone').dropzone({
+        uploadMultiple: false,
+        acceptedFiles: '.csv,text/csv,text/x-csv,application/csv,application/x-csv,text/comma-separated-values,text/x-comma-separated-values',
+        maxFiles: 1,
+        success: function() {
+            $('#processingIndicator').show();
+        }
+    })
 });
