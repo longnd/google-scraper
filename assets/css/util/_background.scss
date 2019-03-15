@@ -1,0 +1,5 @@
+.bg-gradient-primary {
+  background-color: $primary;
+  background-image: linear-gradient(180deg, $primary 10%, darken($primary, 15%) 100%);
+  background-size: cover;
+}
