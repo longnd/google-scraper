@@ -1,0 +1,5 @@
+label:
+  upload_file: Upload file
+
+message:
+  upload_description: Please upload a CSV file to get the scraping results

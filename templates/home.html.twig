@@ -1,1 +1,21 @@
 {% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h1 class="h3 mt-4 mb-2 text-gray-800">{{ 'label.upload_file'|trans }}</h1>
+        <p class="mb-4">
+            {{ 'message.upload_description'|trans }}
+        </p>
+
+        <div class="row">
+            <div class="col-md-12">
+                <form id="csvUploader" class="dropzone" method="post" action="{{ path('home') }}"
+                      enctype="multipart/form-data" data-dictDefaultMessage="Click here to upload nhe">
+                    <div class="fallback">
+                        <input name="file" type="file" multiple />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

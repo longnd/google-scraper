@@ -7,8 +7,20 @@
 
 // any CSS you require will output into a single css file (app.css in this case)
 require('../css/app.scss');
+require('dropzone/dist/dropzone.css');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 const $ = require('jquery');
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+var Dropzone = require('dropzone');
+
+Dropzone.options.csvUploader = {
+    uploadMultiple: false,
+    acceptedFiles: '.csv,text/csv,text/x-csv,application/csv,application/x-csv,text/comma-separated-values,text/x-comma-separated-values',
+    maxFiles: 1,
+    dictDefaultMessage: 'Drop CSV file here or Click to upload'
+};
+
+$(document).ready(function() {
+
+});
