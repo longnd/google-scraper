@@ -29,7 +29,7 @@
                 </li>
                 <hr class="sidebar-divider my-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ path('reports') }}">
                         <i class="fas fa-fw fa-book"></i>
                         <span>Reports</span>
                     </a>
@@ -42,6 +42,18 @@
                     </a>
                 </li>
             </ul>
+
+            <div id="content-wrapper" class="d-flex flex-column">
+                <div id="content">
+                    {% block content %}{% endblock %}
+                </div>
+
+                <footer class="sticky-footer bg-white">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright © 2019</span>
+                    </div>
+                </footer>
+            </div>
         </div>
 
         {{ encore_entry_script_tags('app') }}
