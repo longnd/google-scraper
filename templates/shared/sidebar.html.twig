@@ -4,28 +4,28 @@
             <i class="fab fa-google"></i>
         </div>
         <div class="sidebar-brand-text mx-3">
-            Scraper
+            {{ 'menu.scraper'|trans }}
         </div>
     </a>
     <hr class="sidebar-divider my-0">
-    <li class="nav-item active">
+    <li class="nav-item {% if 'home' == app.request.get('_route') %} active {% endif %}">
         <a class="nav-link" href="{{ path('home') }}">
             <i class="fas fa-filter"></i>
-            <span>Scraping</span>
+            <span>{{ 'menu.scraping'|trans }}</span>
         </a>
     </li>
     <hr class="sidebar-divider my-0">
-    <li class="nav-item">
+    <li class="nav-item {% if 'reports' == app.request.get('_route') %} active {% endif %}">
         <a class="nav-link" href="{{ path('reports') }}">
             <i class="fas fa-fw fa-book"></i>
-            <span>Reports</span>
+            <span>{{ 'menu.reports'|trans }}</span>
         </a>
     </li>
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
         <a class="nav-link" target="_blank" href="https://github.com/longnd/google-scraper">
             <i class="fab fa-fw fa-github-alt"></i>
-            <span>Github</span>
+            <span>{{ 'menu.github'|trans }}</span>
         </a>
     </li>
 </ul>

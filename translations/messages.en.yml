@@ -1,3 +1,9 @@
+menu:
+  scraper: Scraper
+  scraping: Scraping
+  reports: Reports
+  github: Github
+
 label:
   upload_file: Upload file
 
