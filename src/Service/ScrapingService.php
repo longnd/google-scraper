@@ -115,15 +115,15 @@ class ScrapingService
         $crawler = $this->client->request('GET', sprintf('%s/search?q=%s', self::GOOGLE_DOMAIN, $keyword));
 
         $fullPageHtml = $crawler->html();
-        $totalResults = $crawler->filter('#resultStats')->text();
+        $resultStats = $crawler->filter('#resultStats')->text();
         $linksCount = $crawler->filter('a')->count();
         $adWordsCount = $crawler->filter('.ads-visurl')->count();
 
         return [
             'html' => $fullPageHtml,
-            'totalResults' => $totalResults,
-            'linkCounts' => $linksCount,
             'adWordsCount' => $adWordsCount,
+            'linkCounts' => $linksCount,
+            'resultStats' => $resultStats,
         ];
     }
 }
