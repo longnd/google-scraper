@@ -10,6 +10,7 @@
 
 namespace App\Controller;
 
+use App\Service\ScrapingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -22,8 +23,10 @@ class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="csvUpload")
+     *
+     * @return JsonResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request, TranslatorInterface $translator)
+    public function index(Request $request, TranslatorInterface $translator, ScrapingService $scrapingService)
     {
         $form = $this->createFormBuilder()
             ->add('csvFile', FileType::class)
@@ -53,6 +56,8 @@ class HomeController extends AbstractController
                 }
 
                 fclose($openedFile);
+
+                $scrapingService->createScrapingRequest($keywords);
 
                 return new JsonResponse(['success' => true]);
             }
