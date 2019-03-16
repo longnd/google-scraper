@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
+        "fabpot/goutte": "^3.2",
         "sensio/framework-extra-bundle": "^5.1",
         "sensiolabs/security-checker": "^5.0",
         "stof/doctrine-extensions-bundle": "^1.3",
