@@ -18,7 +18,7 @@ class ScrapingResult
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ScrapingRequest", inversedBy="results")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ScrapingRequest", inversedBy="results", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $request;
@@ -39,12 +39,12 @@ class ScrapingResult
     private $linksCount;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $resultStat;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $html;
 
@@ -107,12 +107,12 @@ class ScrapingResult
         return $this;
     }
 
-    public function getResultStat(): ?int
+    public function getResultStat(): ?string
     {
         return $this->resultStat;
     }
 
-    public function setResultStat(int $resultStat): self
+    public function setResultStat(string $resultStat): self
     {
         $this->resultStat = $resultStat;
 
