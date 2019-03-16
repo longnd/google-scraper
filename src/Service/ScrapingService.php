@@ -126,4 +126,28 @@ class ScrapingService
             'resultStats' => $resultStats,
         ];
     }
+
+    /**
+     * Update a keyword search status - it was created when the CSV file uploaded with default status.
+     */
+    public function updateResult(ScrapingResult $result, array $data)
+    {
+        $result->setAdWordsCount($data['adWordsCount'])
+            ->setLinksCount($data['linkCounts'])
+            ->setResultStat($data['resultStats'])
+            ->setHtml($data['html']);
+
+        $this->em->persist($result);
+        $this->em->flush();
+    }
+
+    /**
+     * Mark a scraping request as completed.
+     */
+    public function markScrapingRequestCompleted(ScrapingRequest $request)
+    {
+        $request->setIsCompleted(true);
+        $this->em->persist($request);
+        $this->em->flush();
+    }
 }

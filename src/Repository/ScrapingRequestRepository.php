@@ -18,4 +18,15 @@ class ScrapingRequestRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, ScrapingRequest::class);
     }
+
+    /**
+     * Get all scraping request which haven't been completed.
+     */
+    public function getScrapingRequests()
+    {
+        return $this->createQueryBuilder('r')
+            ->where('r.isCompleted = false')
+            ->getQuery()
+            ->execute();
+    }
 }

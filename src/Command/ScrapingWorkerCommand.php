@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Entity\ScrapingRequest;
 use App\Repository\ScrapingRequestRepository;
 use App\Repository\ScrapingResultRepository;
 use App\Service\ScrapingService;
@@ -43,7 +44,7 @@ class ScrapingWorkerCommand extends Command
     }
 
     /**
-     * execute the command
+     * execute the command.
      *
      * @return int|void|null
      */
@@ -61,6 +62,31 @@ class ScrapingWorkerCommand extends Command
                 "AdWords Advertisers: <info>%s</info>\nLinks: <info>%s</info>\nResult stats: <info>%s</info>",
                 $result['adWordsCount'], $result['linkCounts'], $result['resultStats']
             ));
+
+            return;
         }
+
+        $scrapingRequests = $this->scrapingRequestRepo->getScrapingRequests();
+
+        /** @var ScrapingRequest $request */
+        foreach ($scrapingRequests as $request) {
+            $this->handleScrapingRequest($request);
+        }
+    }
+
+    /**
+     * process a scraping request - extract google search results for all of the keywords.
+     */
+    private function handleScrapingRequest(ScrapingRequest $request)
+    {
+        foreach ($request->getResults() as $result) {
+            if (empty($result->getHtml())) {
+                $extractedData = $this->scrapingService->scrap($result->getKeyword());
+
+                $this->scrapingService->updateResult($result, $extractedData);
+            }
+        }
+
+        $this->scrapingService->markScrapingRequestCompleted($request);
     }
 }
