@@ -17,7 +17,8 @@ Dropzone.autoDiscover = false;
 
 $(document).ready(function() {
     $('.dropzone').dropzone({
-        uploadMultiple: false,
+        paramName: 'form[csvFile]',
+        // addRemoveLinks: true,
         acceptedFiles: '.csv,text/csv,text/x-csv,application/csv,application/x-csv,text/comma-separated-values,text/x-comma-separated-values',
         maxFiles: 1,
         success: function() {

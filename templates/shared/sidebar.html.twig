@@ -8,8 +8,8 @@
         </div>
     </a>
     <hr class="sidebar-divider my-0">
-    <li class="nav-item {% if 'home' == app.request.get('_route') %} active {% endif %}">
-        <a class="nav-link" href="{{ path('home') }}">
+    <li class="nav-item {% if 'csvUpload' == app.request.get('_route') %} active {% endif %}">
+        <a class="nav-link" href="{{ path('csvUpload') }}">
             <i class="fas fa-filter"></i>
             <span>{{ 'menu.scraping'|trans }}</span>
         </a>
