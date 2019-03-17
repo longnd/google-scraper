@@ -3,6 +3,8 @@
 namespace App\Tests\Command;
 
 use App\Command\ScrapingWorkerCommand;
+use App\Entity\ScrapingRequest;
+use App\Entity\ScrapingResult;
 use App\Repository\ScrapingRequestRepository;
 use App\Repository\ScrapingResultRepository;
 use App\Service\ScrapingService;
@@ -15,6 +17,7 @@ class ScrapingWorkerCommandTest extends KernelTestCase
     private $scrapingRequestRepo;
     private $scrapingResultRepo;
     private $scrapingService;
+    private $command;
 
     public function setup()
     {
@@ -35,6 +38,15 @@ class ScrapingWorkerCommandTest extends KernelTestCase
         $this->scrapingService->expects($this->any())
             ->method('scrap')
             ->will($this->returnValueMap($scrapingResultsMap));
+
+        $this->command = new ScrapingWorkerCommand(
+            $this->scrapingRequestRepo,
+            $this->scrapingResultRepo,
+            $this->scrapingService
+        );
+
+        $application = new Application();
+        $application->add($this->command);
     }
 
     /**
@@ -42,18 +54,9 @@ class ScrapingWorkerCommandTest extends KernelTestCase
      */
     public function testProvidedKeyword()
     {
-        $command = new ScrapingWorkerCommand(
-            $this->scrapingRequestRepo,
-            $this->scrapingResultRepo,
-            $this->scrapingService
-        );
-
-        $application = new Application();
-        $application->add($command);
-
-        $commandTester = new CommandTester($command);
+        $commandTester = new CommandTester($this->command);
         $commandTester->execute([
-            'command' => $command->getName(),
+            'command' => $this->command->getName(),
             'keyword' => 'john doe',
         ]);
 
