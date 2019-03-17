@@ -40,3 +40,12 @@ $ yarn encore dev --watch
 
 ### Demo
 [https://gg-scraper.herokuapp.com/](https://gg-scraper.herokuapp.com/)
+
+Notice: This demo runs on a [free Heroku dyno](https://devcenter.heroku.com/articles/free-dyno-hours) which will sleep if it receives no web traffic in a 30-minute period so you might expect a short delay for the first try.
+
+### More info
+This app was built on these things:
+- [Symfony](https://symfony.com/) 4 web framework
+- [PSR-1](https://www.php-fig.org/psr/psr-1/) and [PSR-2](https://www.php-fig.org/psr/psr-2/) as coding standards - verified by [PHP Coding standard fixer](https://cs.symfony.com/)
+- [Travis CI](https://travis-ci.org) to build & test 
+- [Heroku](https://heroku.com) to run the app
