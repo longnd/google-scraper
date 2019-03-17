@@ -15,7 +15,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class ScrapingWorkerCommand extends Command
 {
     protected static $defaultName = 'app:scraper';
-    private $em;
     private $scrapingRequestRepo;
     private $scrapingResultRepo;
     private $scrapingService;
