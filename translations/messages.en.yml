@@ -16,6 +16,7 @@ label:
   total_links: Total links
   result_stat: Result statistic
   html: HTML
+  show: Show
 
 message:
   upload_description: Please upload a CSV file to get the scraping results
@@ -29,3 +30,4 @@ error:
   file_cannot_open: File cannot be opened for reading.
   invalid_form_submitted: Invalid form submitted.
   report_not_found: Report not found.
+  result_not_found: Result not found.

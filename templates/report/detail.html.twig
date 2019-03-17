@@ -34,7 +34,9 @@
                                 <td>{{ result.adWordsCount }}</td>
                                 <td>{{ result.linksCount }}</td>
                                 <td>{{ result.resultStat }}</td>
-                                <td></td>
+                                <td>
+                                    <a href="{{ path('searchResultHtml', {'id': result.id}) }}" target="_blank">{{ 'label.show'|trans }}</a>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>
