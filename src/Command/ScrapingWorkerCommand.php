@@ -81,7 +81,7 @@ class ScrapingWorkerCommand extends Command
                 $extractedData = $this->scrapingService->scrap($result->getKeyword());
 
                 $this->scrapingService->updateResult($result, $extractedData);
-                $io->writeln(sprintf("<info>Keyword: %s: %s</info>", $result->getKeyword(), $extractedData['resultStats']));
+                $io->writeln(sprintf('<info>Keyword: %s: %s</info>', $result->getKeyword(), $extractedData['resultStats']));
             }
         }
 
