@@ -52,6 +52,8 @@ class ScrapingService
             $result = new ScrapingResult();
             $result->setRequest($request)
                 ->setKeyword($keyword);
+
+            $request->addResult($result);
             $this->em->persist($result);
         }
 
