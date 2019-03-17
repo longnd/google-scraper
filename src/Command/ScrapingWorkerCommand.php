@@ -6,7 +6,6 @@ use App\Entity\ScrapingRequest;
 use App\Repository\ScrapingRequestRepository;
 use App\Repository\ScrapingResultRepository;
 use App\Service\ScrapingService;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -30,12 +29,10 @@ class ScrapingWorkerCommand extends Command
     }
 
     public function __construct(
-        EntityManagerInterface $em,
         ScrapingRequestRepository $scrapingRequestRepo,
         ScrapingResultRepository $scrapingResultRepo,
         ScrapingService $scrapingService)
     {
-        $this->em = $em;
         $this->scrapingRequestRepo = $scrapingRequestRepo;
         $this->scrapingResultRepo = $scrapingResultRepo;
         $this->scrapingService = $scrapingService;
