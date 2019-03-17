@@ -6,10 +6,16 @@ menu:
 
 label:
   upload_file: Upload file
+  scraping_reports: Scraping Reports
+  date: Date
+  total_keywords: Total keywords
+  completed: Completed
+  history: History
 
 message:
   upload_description: Please upload a CSV file to get the scraping results
   scraping_in_progress: Processing. The page will be refreshed automatically when process is completed!
+  all_scraping_request_histories: Here you can find all of the history of the scraping requests
 
 error:
   only_csv_accepted: Invalid file. Only CSV accepted.

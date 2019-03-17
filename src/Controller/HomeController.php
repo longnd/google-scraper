@@ -65,12 +65,4 @@ class HomeController extends AbstractController
 
         return $this->render('home.html.twig', ['form' => $form->createView()]);
     }
-
-    /**
-     * @Route("/reports", name="reports")
-     */
-    public function report()
-    {
-        return $this->render('report/general.html.twig');
-    }
 }

@@ -29,4 +29,15 @@ class ScrapingRequestRepository extends ServiceEntityRepository
             ->getQuery()
             ->execute();
     }
+
+    /**
+     * Get all scraping requests.
+     */
+    public function getAllScrapingRequest()
+    {
+        return $this->createQueryBuilder('r')
+            ->orderBy('r.createdAt', 'DESC')
+            ->getQuery()
+            ->execute();
+    }
 }
