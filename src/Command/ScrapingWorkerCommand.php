@@ -6,7 +6,6 @@ use App\Entity\ScrapingRequest;
 use App\Repository\ScrapingRequestRepository;
 use App\Repository\ScrapingResultRepository;
 use App\Service\ScrapingService;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,7 +15,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class ScrapingWorkerCommand extends Command
 {
     protected static $defaultName = 'app:scraper';
-    private $em;
     private $scrapingRequestRepo;
     private $scrapingResultRepo;
     private $scrapingService;
@@ -30,12 +28,10 @@ class ScrapingWorkerCommand extends Command
     }
 
     public function __construct(
-        EntityManagerInterface $em,
         ScrapingRequestRepository $scrapingRequestRepo,
         ScrapingResultRepository $scrapingResultRepo,
         ScrapingService $scrapingService)
     {
-        $this->em = $em;
         $this->scrapingRequestRepo = $scrapingRequestRepo;
         $this->scrapingResultRepo = $scrapingResultRepo;
         $this->scrapingService = $scrapingService;
@@ -70,20 +66,22 @@ class ScrapingWorkerCommand extends Command
 
         /** @var ScrapingRequest $request */
         foreach ($scrapingRequests as $request) {
-            $this->handleScrapingRequest($request);
+            $this->handleScrapingRequest($request, $io);
         }
     }
 
     /**
      * process a scraping request - extract google search results for all of the keywords.
      */
-    private function handleScrapingRequest(ScrapingRequest $request)
+    private function handleScrapingRequest(ScrapingRequest $request, SymfonyStyle $io)
     {
+        $io->note(sprintf('Start processing request %s:', $request->getId()));
         foreach ($request->getResults() as $result) {
             if (empty($result->getHtml())) {
                 $extractedData = $this->scrapingService->scrap($result->getKeyword());
 
                 $this->scrapingService->updateResult($result, $extractedData);
+                $io->writeln(sprintf('<info>Keyword: %s: %s</info>', $result->getKeyword(), $extractedData['resultStats']));
             }
         }
 
