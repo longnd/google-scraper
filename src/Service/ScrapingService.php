@@ -49,12 +49,14 @@ class ScrapingService
     {
         $request = new ScrapingRequest();
         foreach ($keywords as $keyword) {
-            $result = new ScrapingResult();
-            $result->setRequest($request)
-                ->setKeyword($keyword);
+            if (!empty($keyword)) {
+                $result = new ScrapingResult();
+                $result->setRequest($request)
+                    ->setKeyword($keyword);
 
-            $request->addResult($result);
-            $this->em->persist($result);
+                $request->addResult($result);
+                $this->em->persist($result);
+            }
         }
 
         $this->em->persist($request);
