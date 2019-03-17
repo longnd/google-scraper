@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h1 class="h3 mt-4 mb-2 text-gray-800">{{ 'label.scraping_reports'|trans }}</h1>
+        <p class="mb-4">
+            {{ 'message.all_scraping_request_histories'|trans }}
+        </p>
+
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <a href="{{ path('reports') }}">
+                        {{ 'label.history'|trans }}
+                    </a>
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>{{ 'label.keyword'|trans }}</th>
+                            <th>{{ 'label.total_AdWords'|trans }}</th>
+                            <th>{{ 'label.total_links'|trans }}</th>
+                            <th>{{ 'label.result_stat'|trans }}</th>
+                            <th>{{ 'label.html'|trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for result in results %}
+                            <tr>
+                                <td>{{ result.keyword }}</td>
+                                <td>{{ result.adWordsCount }}</td>
+                                <td>{{ result.linksCount }}</td>
+                                <td>{{ result.resultStat }}</td>
+                                <td>
+                                    <a href="{{ path('searchResultHtml', {'id': result.id}) }}" target="_blank">{{ 'label.show'|trans }}</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

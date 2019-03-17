@@ -9,9 +9,10 @@
 
         <div class="row">
             <div class="col-md-12">
-                <form id="csvUploader" class="dropzone" method="post" action="{{ path('csvUpload') }}"
+                <form id="csvUploader" class="dropzone" method="post" action="{{ path('csvUpload') }} "
+                      data-status-check-url="{{ path('requestStatusCheck', {'id': 'place_holder'}) }}"
                       enctype="multipart/form-data">
-                    <div class="dz-default dz-message"><span>Drop CSV file here or Click to upload</span></div>
+                    <div class="dz-default dz-message"><span>{{ 'message.drop_file_to_upload'|trans }}</span></div>
                     <div class="fallback">
                         {{ form_widget(form.csvFile) }}
                     </div>

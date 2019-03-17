@@ -22,10 +22,21 @@ class ScrapingRequestRepository extends ServiceEntityRepository
     /**
      * Get all scraping request which haven't been completed.
      */
-    public function getScrapingRequests()
+    public function getPendingScrapingRequests()
     {
         return $this->createQueryBuilder('r')
             ->where('r.isCompleted = false')
+            ->getQuery()
+            ->execute();
+    }
+
+    /**
+     * Get all scraping requests.
+     */
+    public function getAllScrapingRequest()
+    {
+        return $this->createQueryBuilder('r')
+            ->orderBy('r.createdAt', 'DESC')
             ->getQuery()
             ->execute();
     }
