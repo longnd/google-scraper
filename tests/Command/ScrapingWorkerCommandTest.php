@@ -66,4 +66,41 @@ class ScrapingWorkerCommandTest extends KernelTestCase
         $this->assertContains('Links:', $output);
         $this->assertContains('Result stats', $output);
     }
+
+    /**
+     * Test the worker - no particular keyword provided - the worker just look into DB
+     * for pending scraping request and do the crawling using their uploaded keywords.
+     *
+     * @dataProvider workerDataProvider
+     */
+    public function testWorker($scrapingRequest)
+    {
+        $this->scrapingRequestRepo->expects($this->any())
+            ->method('getPendingScrapingRequests')
+            ->willReturn([$scrapingRequest]);
+
+        $commandTester = new CommandTester($this->command);
+        $commandTester->execute([
+            'command' => $this->command->getName(),
+        ]);
+
+        $output = $commandTester->getDisplay();
+        $this->assertContains('Start processing request', $output);
+        $this->assertContains('Keyword', $output);
+    }
+
+    public function workerDataProvider()
+    {
+        $scrapingRequest = new ScrapingRequest();
+        $scrapingRequest->setIsCompleted(false);
+
+        $result = new ScrapingResult();
+        $result->setKeyword('john doe');
+
+        $scrapingRequest->addResult($result);
+
+        return [
+            [$scrapingRequest],
+        ];
+    }
 }
