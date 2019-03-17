@@ -11,13 +11,19 @@ label:
   total_keywords: Total keywords
   completed: Completed
   history: History
+  keyword: Keyword
+  total_AdWords: Total AdWords
+  total_links: Total links
+  result_stat: Result statistic
+  html: HTML
 
 message:
   upload_description: Please upload a CSV file to get the scraping results
   scraping_in_progress: Processing. The page will be refreshed automatically when process is completed!
-  all_scraping_request_histories: Here you can find all of the history of the scraping requests
+  all_scraping_request_histories: Here you can find all history of the scraping requests
 
 error:
   only_csv_accepted: Invalid file. Only CSV accepted.
   file_cannot_open: File cannot be opened for reading.
   invalid_form_submitted: Invalid form submitted.
+  report_not_found: Report not found.

@@ -24,7 +24,7 @@
                         <tbody>
                             {% for request in requests %}
                             <tr>
-                                <td>{{ request.createdAt|date }}</td>
+                                <td><a href="{{ path('detailReport', {'id': request.id}) }}">{{ request.createdAt|date }}</a></td>
                                 <td>{{ request.results|length }}</td>
                                 <td>{{ request.isCompleted ? 'Yes': 'No' }}</td>
                             </tr>
