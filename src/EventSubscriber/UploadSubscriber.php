@@ -24,7 +24,8 @@ class UploadSubscriber implements EventSubscriberInterface
 
         /*
          * After user upload CSV file contains search keywords, activate the worker to search
-         * for those keywords and extract the data
+         * for those keywords and extract the data.
+         * This just happens after the web send back the response to the user only.
          */
         if ('csvUpload' === $request->attributes->get('_route') && 'POST' === $request->getMethod()) {
             // run the worker to do the search and extract results
