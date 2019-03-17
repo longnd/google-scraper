@@ -9,7 +9,7 @@ cache:
 
 env:
   global:
-    - SYMFONY_ENV=test
+    - APP_ENV=test
     - SYMFONY_PHPUNIT_DIR=./bin/.phpunit
     - SYMFONY_DEPRECATIONS_HELPER=29
 
@@ -28,7 +28,7 @@ before_install:
 install:
   - composer install
   - ./bin/phpunit install
-#  - php bin/console doctrine:migrations:migrate --no-interaction
+  - php bin/console doctrine:migrations:migrate --no-interaction
 
 script:
   - ./bin/phpunit

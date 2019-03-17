@@ -1,0 +1,17 @@
+menu:
+  scraper: Scraper
+  scraping: Scraping
+  reports: Reports
+  github: Github
+
+label:
+  upload_file: Upload file
+
+message:
+  upload_description: Please upload a CSV file to get the scraping results
+  scraping_in_progress: Processing. The page will be refreshed automatically when process is completed!
+
+error:
+  only_csv_accepted: Invalid file. Only CSV accepted.
+  file_cannot_open: File cannot be opened for reading.
+  invalid_form_submitted: Invalid form submitted.

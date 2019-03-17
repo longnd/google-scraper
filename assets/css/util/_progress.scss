@@ -1,0 +1,9 @@
+.processingIndicator {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.progress-bar-animated {
+  animation: progress-bar-stripes $progress-bar-animation-timing;
+}
