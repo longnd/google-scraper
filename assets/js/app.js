@@ -26,12 +26,11 @@ function checkIfScrapingCompleted(url)
         success: function (response) {
             if (true === response.completed) {
                 window.location.replace(response.report_url);
-            } else {
-                // re-run the status check if the status is still "incomplete"
-                setTimeout(statusCheckWorker, 3000);
             }
         }
     });
+
+    // re-run the status check if the status is still "incomplete"
     setTimeout(function() {
         checkIfScrapingCompleted(url)
     }, 5000);
