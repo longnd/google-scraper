@@ -66,20 +66,22 @@ class ScrapingWorkerCommand extends Command
 
         /** @var ScrapingRequest $request */
         foreach ($scrapingRequests as $request) {
-            $this->handleScrapingRequest($request);
+            $this->handleScrapingRequest($request, $io);
         }
     }
 
     /**
      * process a scraping request - extract google search results for all of the keywords.
      */
-    private function handleScrapingRequest(ScrapingRequest $request)
+    private function handleScrapingRequest(ScrapingRequest $request, SymfonyStyle $io)
     {
+        $io->note(sprintf('Start processing request %s:', $request->getId()));
         foreach ($request->getResults() as $result) {
             if (empty($result->getHtml())) {
                 $extractedData = $this->scrapingService->scrap($result->getKeyword());
 
                 $this->scrapingService->updateResult($result, $extractedData);
+                $io->writeln(sprintf("<info>Keyword: %s: %s</info>", $result->getKeyword(), $extractedData['resultStats']));
             }
         }
 
