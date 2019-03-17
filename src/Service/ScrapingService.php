@@ -57,6 +57,8 @@ class ScrapingService
 
         $this->em->persist($request);
         $this->em->flush();
+
+        return $request;
     }
 
     /**

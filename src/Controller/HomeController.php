@@ -10,6 +10,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ScrapingRequestRepository;
 use App\Service\ScrapingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -17,6 +18,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class HomeController extends AbstractController
@@ -57,12 +59,30 @@ class HomeController extends AbstractController
 
                 fclose($openedFile);
 
-                $scrapingService->createScrapingRequest($keywords);
+                $request = $scrapingService->createScrapingRequest($keywords);
 
-                return new JsonResponse(['success' => true]);
+                return new JsonResponse([
+                    'success' => true,
+                    'id' => $request->getId(),
+                ]);
             }
         }
 
         return $this->render('home.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * check if a scraping request is completed.
+     *
+     * @Route("/request/{id}/status", name="requestStatusCheck")
+     */
+    public function checkScrapingStatus($id, ScrapingRequestRepository $scrapingRequestRepo)
+    {
+        $request = $scrapingRequestRepo->find($id);
+
+        return new JsonResponse([
+            'completed' => $request->getIsCompleted(),
+            'report_url' => $this->generateUrl('detailReport', ['id' => $id], UrlGeneratorInterface::ABSOLUTE_PATH),
+        ]);
     }
 }

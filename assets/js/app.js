@@ -15,14 +15,43 @@ const $ = require('jquery');
 var Dropzone = require('dropzone');
 Dropzone.autoDiscover = false;
 
+/**
+ * Periodically check if a scraping request is completed to redirect the user to the result page.
+ * @param url
+ */
+function checkIfScrapingCompleted(url)
+{
+    $.ajax({
+        url: url,
+        success: function (response) {
+            if (true === response.completed) {
+                window.location.replace(response.report_url);
+            } else {
+                // re-run the status check if the status is still "incomplete"
+                setTimeout(statusCheckWorker, 3000);
+            }
+        }
+    });
+    setTimeout(function() {
+        checkIfScrapingCompleted(url)
+    }, 5000);
+}
+
 $(document).ready(function() {
     $('.dropzone').dropzone({
         paramName: 'form[csvFile]',
         // addRemoveLinks: true,
         acceptedFiles: '.csv,text/csv,text/x-csv,application/csv,application/x-csv,text/comma-separated-values,text/x-comma-separated-values',
         maxFiles: 1,
-        success: function() {
+        success: function(file, response) {
             $('#processingIndicator').show();
+
+            let url = $('.dropzone').data('status-check-url').replace('place_holder', response.id);
+
+            // call the status check for the first time, all subsequent calls will take care of themselves
+            setTimeout(function() {
+                checkIfScrapingCompleted(url)
+            }, 5000);
         }
     })
 });

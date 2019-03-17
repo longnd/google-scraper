@@ -22,6 +22,7 @@ message:
   scraping_in_progress: Processing. The page will be refreshed automatically when process is completed!
   all_scraping_request_histories: Here you can find all history of the scraping requests
   page_not_found: The requested page couldn't be located. Checkout for any URL misspelling.
+  drop_file_to_upload: Drop CSV file here or Click to upload
 
 error:
   only_csv_accepted: Invalid file. Only CSV accepted.
