@@ -66,7 +66,7 @@ class ScrapingWorkerCommand extends Command
             return;
         }
 
-        $scrapingRequests = $this->scrapingRequestRepo->getScrapingRequests();
+        $scrapingRequests = $this->scrapingRequestRepo->getPendingScrapingRequests();
 
         /** @var ScrapingRequest $request */
         foreach ($scrapingRequests as $request) {
