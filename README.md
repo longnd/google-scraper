@@ -43,9 +43,17 @@ $ yarn encore dev --watch
 
 Notice: This demo runs on a [free Heroku dyno](https://devcenter.heroku.com/articles/free-dyno-hours) which will sleep if it receives no web traffic in a 30-minute period so you might expect a short delay for the first try.
 
+### Usage
+Just using the web UI to upload the CSV and wait for the result.
+Or you can execute a console command to get the result for a specific keyword
+```sh
+$ php bin/console app:scraper <keyword>
+```
+
 ### More info
 This app was built on these things:
 - [Symfony](https://symfony.com/) 4 web framework
 - [PSR-1](https://www.php-fig.org/psr/psr-1/) and [PSR-2](https://www.php-fig.org/psr/psr-2/) as coding standards - verified by [PHP Coding standard fixer](https://cs.symfony.com/)
 - [Travis CI](https://travis-ci.org) to build & test 
 - [Heroku](https://heroku.com) to run the app
+- [GitHub flow](https://guides.github.com/introduction/flow/) as Git branching model
